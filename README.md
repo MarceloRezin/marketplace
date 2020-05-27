@@ -266,7 +266,7 @@ Retorna a categoria criada.
 }
 ```
 ---
-#### PUT&nbsp;&nbsp;&nbsp; /categorias/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Atualiza um usuário_
+#### PUT&nbsp;&nbsp;&nbsp; /categorias/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Atualiza uma categoria_
 
 ##### Parâmetros:
 | Parâmetro | Descrição |
@@ -297,7 +297,7 @@ Retorna a versão anterior da categoria.
 }
 ```
 ---
-#### DELETE&nbsp;&nbsp;&nbsp; /categorias/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Remove um usuário_
+#### DELETE&nbsp;&nbsp;&nbsp; /categorias/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Remove uma categoria_
 
 ##### Parâmetros:
 | Parâmetro | Descrição |
@@ -318,6 +318,160 @@ Retorna a categoria removida.
 	"_id": "id",
 	"nome": "Nome do Categoria Removida",
 	"descricao": "descricao"
+	"__v":0
+}
+```
+---
+### Anúncios:
+#### GET&nbsp;&nbsp;&nbsp; /anuncios&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Lista todos os anúncios registrados_
+
+##### Query params:
+| param | Descrição |
+|--|--|
+| nome | Filtro pelo valor especificado utilizando o operador _LIKE_ |
+| limit | Limita a quantidade de registros retornados |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request GET http://localhost:3000/anuncios
+```
+##### Retorno:
+Retorna a lista de anúncios registrados de acordos com os query params informados.
+```
+[
+	{
+		"_id": "id",
+		"nome": "Nome do Anúncio1",
+		"usuario": "id-do-usuario",
+		"valor": {"$numberDecimal":"valorNumerico"},
+		"__v":0
+	},
+	{
+		"_id": "id",
+		"nome": "Nome do Anúncio2",
+		"usuario": "id-do-usuario",
+		"valor": {"$numberDecimal":"valorNumerico"},
+		"__v":0
+	}
+]
+```
+---
+#### GET&nbsp;&nbsp;&nbsp; /anuncios/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Retorna um anúncio específico_
+
+##### Parâmetros:
+| Parâmetro | Descrição |
+|--|--|
+| id | Id do anúncio que se deseja recuperar |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request GET http://localhost:3000/anuncios/id-do-anuncio
+```
+##### Retorno:
+Retorna os dados do anúncios requisitado.
+```
+{
+	"_id": "id",
+	"nome": "Nome do Anúncio",
+	"usuario": "id-do-usuario",
+	"valor": {"$numberDecimal":"valorNumerico"},
+	"__v":0
+}
+```
+---
+#### POST&nbsp;&nbsp;&nbsp; /anuncios&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _Cria um anúncio_
+
+##### Modelagem:
+| Atributo | Tipo | Descrição |
+|--|--|--|
+| nome* | String | Nome do anúncio |
+| descricao | String | Breve descrição com mais detalhes do item anunciado |
+| valor* | Decimal | Valor do item anunciado |
+| usuario* | Usuario | Usuário que fez o anúncio |
+| categoria | Categoria | Categoria do item anunciado para ajudar outros usuários a encontrarem o anúncio |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request POST --data '{"nome":"Nome do Anúncio", "valor":120.30, "usuario":{"_id":"id-do_usuario"}}' http://localhost:3000/anuncios
+```
+##### Retorno:
+Retorna o anúncio criado.
+```
+{
+	"_id": "id",
+	"nome": "Nome do Anúncio",
+	"usuario": "id-do-usuario",
+	"valor": {"$numberDecimal":"120.30"},
+	"__v":0
+}
+```
+---
+#### PUT&nbsp;&nbsp;&nbsp; /anuncios/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Atualiza um anúncio_
+
+##### Parâmetros:
+| Parâmetro | Descrição |
+|--|--|
+| id | Id do anúncio que se deseja atualizar |
+
+##### Modelagem:
+| Atributo | Tipo | Descrição |
+|--|--|--|
+| nome* | String | Nome do anúncio |
+| descricao | String | Breve descrição com mais detalhes do item anunciado |
+| valor* | Decimal | Valor do item anunciado |
+| usuario* | Usuario | Usuário que fez o anúncio |
+| categoria | Categoria | Categoria do item anunciado para ajudar outros usuários a encontrarem o anúncio |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request PUT --data '{"nome":"Nome do Anúncio", "valor":120.30, "usuario":{"_id":"id-do_usuario"}}' http://localhost:3000/anuncios/id-do-anuncio
+```
+##### Retorno:
+Retorna a versão anterior do anúncio.
+```
+{
+	"_id": "id",
+	"nome": "Nome do Anúncio Anterior",
+	"usuario": "id-do-usuario",
+	"valor": {"$numberDecimal":"valor-do-anuncio"},
+	"__v":0
+}
+```
+---
+#### DELETE&nbsp;&nbsp;&nbsp; /anuncios/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Remove um anúncio_
+
+##### Parâmetros:
+| Parâmetro | Descrição |
+|--|--|
+| id | Id do anúncio que se deseja deletar |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request DELETE http://localhost:3000/anuncios/id-do-anuncio
+```
+##### Retorno:
+Retorna o anúncio removido.
+```
+{
+	"_id": "id",
+	"nome": "Nome do Anúncio Removido",
+	"usuario": "id-do-usuario",
+	"valor": {"$numberDecimal":"valor-do-anuncio"},
 	"__v":0
 }
 ```
