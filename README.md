@@ -179,3 +179,145 @@ Retorna o usuário removido.
 	"__v":0
 }
 ```
+---
+### Categorias:
+#### GET&nbsp;&nbsp;&nbsp; /categorias&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Lista todas as categorias registradas_
+
+##### Query params:
+| param | Descrição |
+|--|--|
+| nome | Filtro pelo valor especificado utilizando o operador _LIKE_ |
+| limit | Limita a quantidade de registros retornados |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request GET http://localhost:3000/categorias
+```
+##### Retorno:
+Retorna a lista de categorias registradas de acordos com os query params informados.
+```
+[
+	{
+		"_id": "id",
+		"nome": "nome1",
+		"descricao": "descricao"
+		"__v":0
+	},
+	{
+		"_id": "id",
+		"nome": "nome2",
+		"descricao": "descricao"
+		"__v":0
+	}
+]
+```
+---
+#### GET&nbsp;&nbsp;&nbsp; /categorias/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Retorna uma categoria específica_
+
+##### Parâmetros:
+| Parâmetro | Descrição |
+|--|--|
+| id | Id da categoria que se deseja recuperar |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request GET http://localhost:3000/categorias/id-da-categoria
+```
+##### Retorno:
+Retorna os dados da categoria requisitada.
+```
+{
+	"_id": "id",
+	"nome": "Nome da Categoria",
+	"descricao": "descricao",
+	"__v":0
+}
+```
+---
+#### POST&nbsp;&nbsp;&nbsp; /categorias&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _Cria uma categoria_
+
+##### Modelagem:
+| Atributo | Tipo | Descrição |
+|--|--|--|
+| nome* | String | Nome da categoria |
+| descricao | String | Breve descrição que ajuda os usuário entenderem a categoria |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request POST --data '{"nome":"Nome da Categoria", "descricao":"descricao"}' http://localhost:3000/categorias
+```
+##### Retorno:
+Retorna a categoria criada.
+```
+{
+	"_id": "id",
+	"nome": "Nome do Categoria",
+	"descricao": "descricao"
+	"__v":0
+}
+```
+---
+#### PUT&nbsp;&nbsp;&nbsp; /categorias/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Atualiza um usuário_
+
+##### Parâmetros:
+| Parâmetro | Descrição |
+|--|--|
+| id | Id da categoria que se deseja atualizar |
+
+##### Modelagem:
+| Atributo | Tipo | Descrição |
+|--|--|--|
+| nome* | String | Nome da categoria |
+| descricao | String | Breve descrição que ajuda os usuário entenderem a categoria |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request PUT --data '{"nome":"Nome da Categoria", "descricao":"descricao"}' http://localhost:3000/categorias/id-da-categoria
+```
+##### Retorno:
+Retorna a versão anterior da categoria.
+```
+{
+	"_id": "id",
+	"nome": "Nome do Categoria Anterior",
+	"descricao": "descricao"
+	"__v":0
+}
+```
+---
+#### DELETE&nbsp;&nbsp;&nbsp; /categorias/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Remove um usuário_
+
+##### Parâmetros:
+| Parâmetro | Descrição |
+|--|--|
+| id | Id da categoria que se deseja deletar |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request DELETE http://localhost:3000/categorias/id-da-categoria
+```
+##### Retorno:
+Retorna a categoria removida.
+```
+{
+	"_id": "id",
+	"nome": "Nome do Categoria Removida",
+	"descricao": "descricao"
+	"__v":0
+}
+```
