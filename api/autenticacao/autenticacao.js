@@ -27,12 +27,12 @@ function checkAutenticacao(req, res, next){
     const token = req.headers["x-access-token"];
 
     if (!token) {
-        return res.status(403).json({error: "Você não tem permissão para acessar esse endpoint!"});
+        return res.status(403).json({error: "Você não tem permissão para acessar esse recurso!"});
     }
 
     jwt.verify(token, SECRET, function(err, decoded) {
         if(err){
-            return res.status(403).json({error: "Você não tem permissão para acessar esse endpoint!"});
+            return res.status(403).json({error: "Você não tem permissão para acessar esse recurso!"});
         }
         req.usuarioId = decoded.usuarioId;
 
