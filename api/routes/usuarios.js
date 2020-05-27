@@ -3,7 +3,7 @@ const router = express.Router();
 const Usuario = require("../models/usuario");
 const autenticacao = require("../autenticacao/autenticacao");
 
-router.get("/", (req, res) => {   
+router.get("/", autenticacao.checkAutenticacao, (req, res) => {   
     const nomeQuery = req.query.nome;
     let query = {};
     if(nomeQuery && nomeQuery.trim().length > 0) {
@@ -25,7 +25,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", autenticacao.checkAutenticacao, (req, res) => {
     Usuario.findById(req.params.id, (err, doc) => {
         if(err){
             res.status(500).json({error: "Não foi possível buscar o usuário."});
@@ -77,7 +77,7 @@ router.post("/logar", (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', autenticacao.checkAutenticacao, (req, res) => {
 
     const usuario = req.body;
 
@@ -107,7 +107,7 @@ router.put('/:id', (req, res) => {
     }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', autenticacao.checkAutenticacao, (req, res) => {
     Usuario.findByIdAndDelete(req.params.id, (err, doc) => {
         if(err){
             res.status(500).json({error: "Não foi possível deletar o usuário."});
