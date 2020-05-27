@@ -30,7 +30,7 @@ router.get("/:id", (req, res) => {
             res.status(500).json({error: "Não foi possível buscar o usuário."});
         }else{
             if(doc == null){
-                res.status(400).json({error: "Usuário não encotrado."});
+                res.status(400).json({error: "Usuário não encontrado."});
             }else{
                 res.status(200).json(doc);
             }
@@ -87,7 +87,7 @@ router.put('/:id', (req, res) => {
 
             }else{
                 if(doc == null){
-                    res.status(400).json({error: "Usuário não encotrado."});
+                    res.status(400).json({error: "Usuário não encontrado."});
                 }else{
                     res.status(200).json(doc);
                 }
@@ -102,7 +102,7 @@ router.delete('/:id', (req, res) => {
             res.status(500).json({error: "Não foi possível deletar o usuário."});
         }else{
             if(doc == null){
-                res.status(400).json({error: "Usuário não encotrado."});
+                res.status(400).json({error: "Usuário não encontrado."});
             }else{
                 res.status(200).json(doc);
             }

@@ -31,7 +31,7 @@ router.get("/:id", (req, res) => {
             res.status(500).json({error: "Não foi possível buscar a avaliação."});
         }else{
             if(doc == null){
-                res.status(400).json({error: "Avaliação não encotrada."});
+                res.status(400).json({error: "Avaliação não encontrada."});
             }else{
                 res.status(200).json(doc);
             }
@@ -78,7 +78,7 @@ router.put('/:id', (req, res) => {
                 res.status(500).json({error: "Não foi possível atualizar a avaliação."});
             }else{
                 if(doc == null){
-                    res.status(400).json({error: "Avaliação não encotrada."});
+                    res.status(400).json({error: "Avaliação não encontrada."});
                 }else{
                     res.status(200).json(doc);
                 }
@@ -93,7 +93,7 @@ router.delete('/:id', (req, res) => {
             res.status(500).json({error: "Não foi possível deletar a avaliação."});
         }else{
             if(doc == null){
-                res.status(400).json({error: "Avaliação não encotrada."});
+                res.status(400).json({error: "Avaliação não encontrada."});
             }else{
                 res.status(200).json(doc);
             }
