@@ -475,3 +475,154 @@ Retorna o anúncio removido.
 	"__v":0
 }
 ```
+---
+### Avaliações:
+#### GET&nbsp;&nbsp;&nbsp; /avaliacoes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Lista todas as avaliações registradas_
+
+##### Query params:
+| param | Descrição |
+|--|--|
+| descricao | Filtro pelo valor especificado utilizando o operador _LIKE_ |
+| limit | Limita a quantidade de registros retornados |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request GET http://localhost:3000/avaliacoes
+```
+##### Retorno:
+Retorna a lista de avaliações registradas de acordo com os query params informados.
+```
+[
+	{
+		"_id": "id",
+		"descricao": "Avaliação 1",
+		"usuario": "id-do-usuario",
+		"anuncio": "id-do-anuncio",
+		"__v":0
+	},
+	{
+		"_id": "id",
+		"descricao": "Avaliação 2",
+		"usuario": "id-do-usuario",
+		"anuncio": "id-do-anuncio",
+		"__v":0
+	}
+]
+```
+---
+#### GET&nbsp;&nbsp;&nbsp; /avaliacoes/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Retorna uma avaliação específica_
+
+##### Parâmetros:
+| Parâmetro | Descrição |
+|--|--|
+| id | Id da avaliação que se deseja recuperar |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request GET http://localhost:3000/avaliacoes/id-da-avaliacao
+```
+##### Retorno:
+Retorna os dados da avaliação requisitada.
+```
+{
+	"_id": "id",
+	"descricao": "Avaliação",
+	"usuario": "id-do-usuario",
+	"anuncio": "id-do-anuncio",
+	"__v":0
+}
+```
+---
+#### POST&nbsp;&nbsp;&nbsp; /avaliacoes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _Cria uma avaliação_
+
+##### Modelagem:
+| Atributo | Tipo | Descrição |
+|--|--|--|
+| descricao* | String | Texto que representa a avaliação em si |
+| usuario* | Usuario | Usuário que fez a avaliação |
+| anuncio* | Anuncio | Anúncio que o usuário está avaliando |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request POST --data '{"descricao":"Avaliação", "usuario":{"_id":"id-do_usuario"}, "anuncio":{"_id":"id-do_anuncio"}}' http://localhost:3000/avaliacoes
+```
+##### Retorno:
+Retorna a avaliação criada.
+```
+{
+	"_id": "id",
+	"descricao": "Avaliação",
+	"usuario": "id-do-usuario",
+	"anuncio": "id-do-anuncio",
+	"__v":0
+}
+```
+---
+#### PUT&nbsp;&nbsp;&nbsp; /avaliacoes/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Atualiza uma avaliação_
+
+##### Parâmetros:
+| Parâmetro | Descrição |
+|--|--|
+| id | Id da avaliação que se deseja atualizar |
+
+
+##### Modelagem:
+| Atributo | Tipo | Descrição |
+|--|--|--|
+| descricao* | String | Texto que representa a avaliação em si |
+| usuario* | Usuario | Usuário que fez a avaliação |
+| anuncio* | Anuncio | Anúncio que o usuário está avaliando |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request PUT --data '{"descricao":"Avaliação", "usuario":{"_id":"id-do_usuario"}, "anuncio":{"_id":"id-do_anuncio"}}' http://localhost:3000/avaliacoes/id-da-avaliacao
+```
+##### Retorno:
+Retorna a versão anterior da avaliação.
+```
+{
+	"_id": "id",
+	"descricao": "Avaliação Anterior",
+	"usuario": "id-do-usuario",
+	"anuncio": "id-do-anuncio",
+	"__v":0
+}
+```
+---
+#### DELETE&nbsp;&nbsp;&nbsp; /avaliacoes/:id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Remove uma avaliação_
+
+##### Parâmetros:
+| Parâmetro | Descrição |
+|--|--|
+| id | Id da avaliação que se deseja deletar |
+
+##### Autenticação:
+Autenticação por meio do token de acesso enviado como parâmetro `x-access-token` no header da requisição. 
+
+##### Exemplo:
+```
+curl -H "Content-Type: application/json" -H "x-access-token: seu-token-de-acesso" --request DELETE http://localhost:3000/avaliacoes/id-da-avaliacao
+```
+##### Retorno:
+Retorna a avaliação removida.
+```
+{
+	"_id": "id",
+	"descricao": "Avaliação Removida",
+	"usuario": "id-do-usuario",
+	"anuncio": "id-do-anuncio",
+	"__v":0
+}
+```
