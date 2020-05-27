@@ -3,10 +3,12 @@ const app = express();
 const db = require("./api/data/db");
 
 const rotaCategorias = require("./api/routes/categorias");
+const rotaUsuarios = require("./api/routes/usuarios");
 
 app.use(express.json());
 
 app.use("/categorias", rotaCategorias);
+app.use("/usuarios", rotaUsuarios);
 
 app.listen(3000, () => {
     console.log('Aplicação executando na porta 3000.');
