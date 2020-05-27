@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Usuario = require('../models/usuario');
+const Usuario = require("../models/usuario");
+const autenticacao = require("../autenticacao/autenticacao");
 
 router.get("/", (req, res) => {   
     const nomeQuery = req.query.nome;
@@ -64,6 +65,16 @@ router.post("/", (req, res) => {
             }
         });
     }
+});
+
+router.post("/logar", (req, res) => {
+    autenticacao.logar(req.body.email, req.body.senha, (err, token) => {
+        if(err){
+            res.status(400).json({error: err.mensagem});
+        }else{
+            res.status(200).json({token});
+        }
+    });
 });
 
 router.put('/:id', (req, res) => {
